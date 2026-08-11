@@ -1,0 +1,97 @@
+:host {
+  --paper: #EFE6D6;
+  --card: #F8F3E8;
+  --ink: #2B2620;
+  --ink-soft: #5B5346;
+  --saffron: #D9A62E;
+  --berbere: #A63A2E;
+  --leaf: #3F5A48;
+  --line: rgba(43,38,32,0.14);
+}
+
+.hero {
+  padding: 64px 28px 56px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Noto Sans Ethiopic', 'Work Sans', sans-serif;
+}
+
+.hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.hero-eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--berbere); }
+.eyebrow {
+  font-family: 'Work Sans', sans-serif;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 11px; font-weight: 600; color: var(--ink-soft);
+}
+
+.hero-title {
+  font-family: 'Fraunces', 'Noto Sans Ethiopic', serif;
+  font-size: 52px; line-height: 1.08; font-weight: 600;
+  letter-spacing: -0.01em; color: var(--ink); margin: 0;
+}
+.hero-title em { font-style: italic; color: var(--berbere); }
+
+.hero-desc {
+  margin-top: 20px; font-size: 16.5px; line-height: 1.7;
+  color: var(--ink-soft); max-width: 480px;
+}
+
+.hero-cta { margin-top: 30px; display: flex; gap: 12px; }
+
+.search-bar {
+  margin-top: 34px; background: var(--card); border: 2px solid var(--ink);
+  border-radius: 10px; padding: 6px; display: flex; gap: 6px; max-width: 520px;
+}
+.search-bar input {
+  flex: 1; border: none; background: transparent; padding: 12px 14px;
+  font-size: 14.5px; font-family: 'Noto Sans Ethiopic', sans-serif;
+  outline: none; color: var(--ink);
+}
+.search-bar button {
+  background: var(--saffron); border: none; border-radius: 6px;
+  padding: 0 20px; font-weight: 700; font-family: 'Noto Sans Ethiopic', sans-serif;
+  cursor: pointer; color: var(--ink);
+}
+
+.btn {
+  font-family: 'Noto Sans Ethiopic', sans-serif;
+  font-size: 13.5px; font-weight: 600; padding: 10px 18px;
+  border-radius: 6px; border: 2px solid var(--ink); cursor: pointer;
+  background: transparent; color: var(--ink);
+}
+.btn-solid { background: var(--ink); color: var(--paper); }
+
+.stall-map {
+  position: relative; background: var(--card); border: 2px solid var(--ink);
+  border-radius: 14px; padding: 22px; transform: rotate(1.2deg);
+}
+.stall-map::before {
+  content: "የገበያ ካርታ"; position: absolute; top: -14px; left: 20px;
+  background: var(--saffron); border: 2px solid var(--ink);
+  padding: 4px 12px; border-radius: 6px; font-size: 12.5px; font-weight: 700;
+}
+.stall-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 14px; }
+.stall {
+  background: var(--paper); border: 1.5px dashed var(--line); border-radius: 8px;
+  padding: 12px 8px; text-align: center; font-size: 12px; color: var(--ink);
+}
+.stall .num {
+  display: block; font-family: 'Fraunces', serif; font-weight: 700;
+  font-size: 15px; color: var(--berbere); margin-bottom: 4px;
+}
+.stall.active { background: var(--leaf); color: #fff; border-style: solid; border-color: var(--leaf); }
+.stall.active .num { color: var(--saffron); }
+
+@media (max-width: 860px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-title { font-size: 38px; }
+}

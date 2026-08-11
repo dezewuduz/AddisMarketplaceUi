@@ -1,0 +1,36 @@
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        <span class="eyebrow">ገበያ ላይ ይግቡ</span>
+      </div>
+      <h1 class="hero-title">ያለ ኪራይ ሱቅ ክፈት፣<br><em>የትም</em> ገበያ ውጣ።</h1>
+      <p class="hero-desc">ማንኛውም ነጋዴ ፎቶ፣ ዋጋ እና መግለጫ ብቻ ለጥፎ በደቂቃዎች ውስጥ ይሸጣል። ገዥዎችም በአንድ ገጽ ላይ ሁሉንም ሱቆች እያመዛዘኑ ትክክለኛውን ያገኛሉ።</p>
+
+      <div class="search-bar">
+        <input type="text" placeholder="ምን ይፈልጋሉ? ለምሳሌ 'ወንድ ጃኬት'" [(ngModel)]="searchQuery" />
+        <button (click)="onSearch()">ፈልግ</button>
+      </div>
+
+      <div class="hero-cta">
+        <button class="btn btn-solid">እንደ ገዥ ግባ</button>
+        <button class="btn">እንደ ሻጭ ተመዝገብ</button>
+      </div>
+    </div>
+
+    <div class="stall-map">
+      <div class="stall-grid">
+        <div class="stall active"><span class="num">014</span>ልብስ</div>
+        <div class="stall"><span class="num">027</span>ጫማ</div>
+        <div class="stall"><span class="num">031</span>ኤሌክትሮ.</div>
+        <div class="stall"><span class="num">045</span>የቤት እቃ</div>
+        <div class="stall active"><span class="num">052</span>ኮስሜቲክስ</div>
+        <div class="stall"><span class="num">063</span>ጌጣጌጥ</div>
+        <div class="stall"><span class="num">071</span>ስፖርት</div>
+        <div class="stall"><span class="num">084</span>ስልክ</div>
+        <div class="stall"><span class="num">099</span>ሌላ</div>
+      </div>
+    </div>
+  </div>
+</div>
