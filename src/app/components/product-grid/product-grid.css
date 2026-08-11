@@ -1,0 +1,91 @@
+:host {
+  --paper: #EFE6D6;
+  --card: #F8F3E8;
+  --ink: #2B2620;
+  --ink-soft: #5B5346;
+  --berbere: #A63A2E;
+}
+
+.product-section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 54px 28px;
+  font-family: 'Noto Sans Ethiopic', 'Work Sans', sans-serif;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 26px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 14px;
+}
+
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.status-text {
+  color: var(--ink-soft);
+  padding: 20px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.p-card {
+  background: var(--card);
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .15s ease;
+}
+
+.p-card:hover { transform: translateY(-4px); }
+
+.p-thumb {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  border-bottom: 1.5px solid var(--ink);
+  background: #E7D9BE;
+}
+
+.p-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.p-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.p-shop { font-size: 11px; color: var(--ink-soft); }
+.p-name { font-weight: 600; font-size: 14.5px; line-height: 1.35; color: var(--ink); }
+.p-price {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--berbere);
+  margin-top: auto;
+}
+
+@media (max-width: 860px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}

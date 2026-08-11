@@ -1,0 +1,34 @@
+<section class="product-section">
+  <div class="section-head">
+    <div class="section-title">ዛሬ የተጨመሩ</div>
+  </div>
+
+  @if (loading()) {
+    <p class="status-text">በመጫን ላይ...</p>
+  }
+
+  @if (error()) {
+    <p class="status-text">ምርቶችን ማምጣት አልተቻለም። API እየሮጠ መሆኑን አረጋግጥ።</p>
+  }
+
+  @if (!loading() && !error()) {
+    <div class="grid">
+      @for (product of products(); track product.id) {
+        <div class="p-card">
+          <div class="p-thumb">
+            @if (product.photoUrl) {
+              <img [src]="product.photoUrl" [alt]="product.name" />
+            } @else {
+              <span>📦</span>
+            }
+          </div>
+          <div class="p-body">
+            <div class="p-shop">{{ product.sellerName }}</div>
+            <div class="p-name">{{ product.name }}</div>
+            <div class="p-price">{{ product.price }} ብር</div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</section>

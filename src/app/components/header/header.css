@@ -1,0 +1,60 @@
+:host {
+  --paper: #EFE6D6;
+  --ink: #2B2620;
+  --ink-soft: #5B5346;
+  --saffron: #D9A62E;
+  --berbere: #A63A2E;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  font-family: 'Noto Sans Ethiopic', 'Work Sans', sans-serif;
+}
+
+.logo { display: flex; align-items: center; gap: 10px; }
+
+.logo-mark {
+  width: 38px; height: 38px; border-radius: 8px;
+  background: var(--berbere);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--paper); font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 20px; transform: rotate(-4deg);
+}
+
+.logo-text {
+  font-family: 'Fraunces', serif; font-weight: 700;
+  font-size: 22px; color: var(--ink);
+}
+
+.logo-text .dot { color: var(--berbere); }
+
+.logo-sub { font-size: 11px; color: var(--ink-soft); margin-top: -2px; }
+
+nav { display: flex; gap: 26px; font-size: 14px; font-weight: 500; }
+
+nav a {
+  color: var(--ink); text-decoration: none;
+  padding-bottom: 2px; border-bottom: 2px solid transparent; cursor: pointer;
+}
+
+nav a:hover { border-bottom-color: var(--saffron); }
+
+.header-actions { display: flex; gap: 10px; }
+
+.btn {
+  font-family: 'Noto Sans Ethiopic', sans-serif;
+  font-size: 13.5px; font-weight: 600; padding: 10px 18px;
+  border-radius: 6px; border: 2px solid var(--ink);
+  cursor: pointer; background: transparent; color: var(--ink);
+}
+
+.btn-berbere { background: var(--berbere); border-color: var(--berbere); color: #fff; }
