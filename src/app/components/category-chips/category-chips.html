@@ -1,0 +1,10 @@
+<div class="cat-row">
+  @for (cat of categories; track cat) {
+    <div
+      class="cat-chip"
+      [class.on]="filterService.selectedCategory() === cat"
+      (click)="selectCategory(cat)">
+      {{ cat }}
+    </div>
+  }
+</div>

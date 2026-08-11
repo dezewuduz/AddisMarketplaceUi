@@ -13,7 +13,7 @@
 
   @if (!loading() && !error()) {
     <div class="grid">
-      @for (product of products(); track product.id) {
+      @for (product of filteredProducts(); track product.id) {
         <div class="p-card">
           <div class="p-thumb">
             @if (product.photoUrl) {
