@@ -1,70 +1,124 @@
 <section class="dashboard">
   <div class="dashboard-header">
     <h2>የእኔ ሱቅ — {{ authService.sellerName() }}</h2>
-    <button class="btn btn-berbere" (click)="showAddForm.set(!showAddForm())">
-      {{ showAddForm() ? 'ዝጋ' : '+ አዲስ ምርት ጨምር' }}
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn" [class.active]="activeTab() === 'products'" (click)="activeTab.set('products')">
+      ምርቶቼ
+    </button>
+    <button class="tab-btn" [class.active]="activeTab() === 'orders'" (click)="activeTab.set('orders')">
+      የደረሱ ትዕዛዞች
     </button>
   </div>
 
-  @if (showAddForm()) {
-    <form class="add-form" (ngSubmit)="onAddProduct()">
-      <input type="text" [(ngModel)]="newProduct.name" name="name" placeholder="የምርት ስም" required />
-      <textarea [(ngModel)]="newProduct.description" name="description" placeholder="መግለጫ" required></textarea>
-      <input type="number" [(ngModel)]="newProduct.price" name="price" placeholder="ዋጋ (ብር)" required />
-<select [(ngModel)]="newProduct.category" name="category" required>
-  <option value="" disabled selected>ምድብ ምረጥ</option>
-  <option value="ልብስ">ልብስ</option>
-  <option value="ጫማ">ጫማ</option>
-  <option value="ኤሌክትሮኒክስ">ኤሌክትሮኒክስ</option>
-  <option value="የቤት እቃ">የቤት እቃ</option>
-  <option value="ኮስሜቲክስ">ኮስሜቲክስ</option>
-  <option value="ጌጣጌጥ">ጌጣጌጥ</option>
-  <option value="ሌላ">ሌላ</option>
-</select>
-<label class="file-label">
-  📷 ፎቶ ምረጥ (Gallery/File Explorer)
-  <input type="file" accept="image/*" (change)="onFileSelected($event)" />
-</label>
+  @if (activeTab() === 'products') {
+    <button class="btn btn-berbere add-toggle" (click)="showAddForm.set(!showAddForm())">
+      {{ showAddForm() ? 'ዝጋ' : '+ አዲስ ምርት ጨምር' }}
+    </button>
 
-@if (uploading()) {
-  <p class="status-text">ፎቶ በመጫን ላይ...</p>
-}
+    @if (showAddForm()) {
+      <form class="add-form" (ngSubmit)="onAddProduct()">
+        <input type="text" [(ngModel)]="newProduct.name" name="name" placeholder="የምርት ስም" required />
+        <textarea [(ngModel)]="newProduct.description" name="description" placeholder="መግለጫ" required></textarea>
+        <input type="number" [(ngModel)]="newProduct.price" name="price" placeholder="ዋጋ (ብር)" required />
 
-@if (newProduct.photoUrl) {
-  <img [src]="newProduct.photoUrl" class="preview-img" alt="preview" />
-}
-      @if (errorMessage()) {
-        <p class="error">{{ errorMessage() }}</p>
-      }
+        <select [(ngModel)]="newProduct.category" name="category" required>
+          <option value="" disabled selected>ምድብ ምረጥ</option>
+          <option value="ልብስ">ልብስ</option>
+          <option value="ጫማ">ጫማ</option>
+          <option value="ኤሌክትሮኒክስ">ኤሌክትሮኒክስ</option>
+          <option value="የቤት እቃ">የቤት እቃ</option>
+          <option value="ኮስሜቲክስ">ኮስሜቲክስ</option>
+          <option value="ጌጣጌጥ">ጌጣጌጥ</option>
+          <option value="ሌላ">ሌላ</option>
+        </select>
 
-      <button type="submit" class="btn btn-solid">አትም</button>
-    </form>
+        <label class="file-label">
+          📷 ፎቶ ምረጥ (Gallery/File Explorer)
+          <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+        </label>
+
+        @if (uploading()) {
+          <p class="status-text">ፎቶ በመጫን ላይ...</p>
+        }
+
+        @if (newProduct.photoUrl) {
+          <img [src]="newProduct.photoUrl" class="preview-img" alt="preview" />
+        }
+
+        @if (errorMessage()) {
+          <p class="error">{{ errorMessage() }}</p>
+        }
+
+        <button type="submit" class="btn btn-solid">አትም</button>
+      </form>
+    }
+
+    @if (loading()) {
+      <p class="status-text">በመጫን ላይ...</p>
+    }
+
+    @if (!loading()) {
+      <div class="my-products-grid">
+        @for (product of myProducts(); track product.id) {
+          <div class="p-card">
+            <div class="p-thumb">
+              @if (product.photoUrl) {
+                <img [src]="product.photoUrl" [alt]="product.name" />
+              } @else {
+                <span>📦</span>
+              }
+            </div>
+            <div class="p-body">
+              <div class="p-name">{{ product.name }}</div>
+              <div class="p-price">{{ product.price }} ብር</div>
+              <button class="delete-btn" (click)="onDelete(product.id)">ሰርዝ</button>
+            </div>
+          </div>
+        } @empty {
+          <p class="status-text">ገና ምንም ምርት አልጨመርክም።</p>
+        }
+      </div>
+    }
   }
 
-  @if (loading()) {
-    <p class="status-text">በመጫን ላይ...</p>
-  }
+  @if (activeTab() === 'orders') {
+    @if (ordersLoading()) {
+      <p class="status-text">በመጫን ላይ...</p>
+    }
 
-  @if (!loading()) {
-    <div class="my-products-grid">
-      @for (product of myProducts(); track product.id) {
-        <div class="p-card">
-          <div class="p-thumb">
-            @if (product.photoUrl) {
-              <img [src]="product.photoUrl" [alt]="product.name" />
-            } @else {
-              <span>📦</span>
+    @if (!ordersLoading()) {
+      <div class="orders-list">
+        @for (order of myOrders(); track order.id) {
+          <div class="order-card">
+            <div class="order-info">
+              <span class="order-id">ትዕዛዝ #{{ order.id }}</span>
+              <span class="order-status" [class]="'status-' + order.status">{{ statusLabels[order.status] }}</span>
+            </div>
+            <div class="order-detail">ብዛት፦ {{ order.quantity }} | ጠቅላላ፦ {{ order.totalPrice }} ብር</div>
+            @if (order.buyer) {
+              <div class="order-detail">ገዥ፦ {{ order.buyer.name }} | 📞 {{ order.buyer.phoneNumber }}</div>
             }
+            <div class="order-detail">ክፍያ፦ {{ order.isPaid ? '✅ ተከፍሏል' : '⏳ አልተከፈለም' }}</div>
+
+            <div class="order-actions">
+              @if (order.status === 0) {
+                <button class="btn-small confirm" (click)="onConfirmOrder(order.id)">አረጋግጥ</button>
+                <button class="btn-small cancel" (click)="onCancelOrder(order.id)">ሰርዝ</button>
+              }
+              @if (order.status === 1) {
+                @if (!order.isPaid) {
+                  <button class="btn-small confirm" (click)="onConfirmPayment(order.id)">ክፍያ አረጋግጥ</button>
+                }
+                <button class="btn-small complete" (click)="onCompleteOrder(order.id)">አጠናቅ</button>
+              }
+            </div>
           </div>
-          <div class="p-body">
-            <div class="p-name">{{ product.name }}</div>
-            <div class="p-price">{{ product.price }} ብር</div>
-            <button class="delete-btn" (click)="onDelete(product.id)">ሰርዝ</button>
-          </div>
-        </div>
-      } @empty {
-        <p class="status-text">ገና ምንም ምርት አልጨመርክም።</p>
-      }
-    </div>
+        } @empty {
+          <p class="status-text">ገና ምንም ትዕዛዝ የለም።</p>
+        }
+      </div>
+    }
   }
 </section>

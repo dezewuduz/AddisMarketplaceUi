@@ -26,9 +26,12 @@
             <div class="p-shop">{{ product.sellerName }}</div>
             <div class="p-name">{{ product.name }}</div>
             <div class="p-price">{{ product.price }} ብር</div>
+            <button class="buy-btn" (click)="onBuyClick(product)">ግዛ</button>
           </div>
         </div>
       }
     </div>
   }
 </section>
+
+<app-order-modal #orderModal></app-order-modal>

@@ -89,3 +89,15 @@
 @media (max-width: 860px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
 }
+.buy-btn {
+  margin-top: 8px;
+  background: var(--berbere);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Noto Sans Ethiopic', sans-serif;
+}

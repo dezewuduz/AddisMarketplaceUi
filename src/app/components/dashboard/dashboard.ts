@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { ProductService, CreateProductRequest } from '../../services/product';
 import { AuthService } from '../../services/auth';
 import { UploadService } from '../../services/upload';
+import { OrderService } from '../../services/order';
 import { Product } from '../../models/product';
+import { Order, OrderStatusLabels } from '../../models/order';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,11 +15,17 @@ import { Product } from '../../models/product';
   styleUrl: './dashboard.css',
 })
 export class Dashboard implements OnInit {
+  activeTab = signal<'products' | 'orders'>('products');
+
   myProducts = signal<Product[]>([]);
   loading = signal(true);
   showAddForm = signal(false);
   errorMessage = signal('');
   uploading = signal(false);
+
+  myOrders = signal<Order[]>([]);
+  ordersLoading = signal(true);
+  statusLabels = OrderStatusLabels;
 
   newProduct: CreateProductRequest = {
     name: '',
@@ -30,11 +38,13 @@ export class Dashboard implements OnInit {
   constructor(
     private productService: ProductService,
     private uploadService: UploadService,
+    private orderService: OrderService,
     public authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.loadMyProducts();
+    this.loadMyOrders();
   }
 
   loadMyProducts(): void {
@@ -48,6 +58,48 @@ export class Dashboard implements OnInit {
         this.loading.set(false);
       },
       error: () => this.loading.set(false)
+    });
+  }
+
+  loadMyOrders(): void {
+    const sellerId = localStorage.getItem('sellerId');
+    if (!sellerId) return;
+
+    this.ordersLoading.set(true);
+    this.orderService.getOrdersBySeller(Number(sellerId)).subscribe({
+      next: (data) => {
+        this.myOrders.set(data);
+        this.ordersLoading.set(false);
+      },
+      error: () => this.ordersLoading.set(false)
+    });
+  }
+
+  onConfirmOrder(orderId: number): void {
+    this.orderService.updateStatus(orderId, 1).subscribe({
+      next: () => this.loadMyOrders(),
+      error: () => this.errorMessage.set('ትዕዛዝ ማረጋገጥ አልተሳካም።')
+    });
+  }
+
+  onCompleteOrder(orderId: number): void {
+    this.orderService.updateStatus(orderId, 2).subscribe({
+      next: () => this.loadMyOrders(),
+      error: () => this.errorMessage.set('ትዕዛዝ ማጠናቀቅ አልተሳካም።')
+    });
+  }
+
+  onCancelOrder(orderId: number): void {
+    this.orderService.updateStatus(orderId, 3).subscribe({
+      next: () => this.loadMyOrders(),
+      error: () => this.errorMessage.set('ትዕዛዝ መሰረዝ አልተሳካም።')
+    });
+  }
+
+  onConfirmPayment(orderId: number): void {
+    this.orderService.confirmPayment(orderId).subscribe({
+      next: () => this.loadMyOrders(),
+      error: () => this.errorMessage.set('ክፍያ ማረጋገጥ አልተሳካም።')
     });
   }
 
