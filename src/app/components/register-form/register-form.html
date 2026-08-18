@@ -1,0 +1,27 @@
+@if (isOpen()) {
+  <div class="modal-overlay" (click)="close()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <h3>ሱቅ ክፈት</h3>
+      <form (ngSubmit)="onSubmit()">
+        <label>የሱቅ ስም</label>
+        <input type="text" [(ngModel)]="form.name" name="name" required placeholder="ሰላም ልብስ ሱቅ" />
+
+        <label>አካባቢ</label>
+        <input type="text" [(ngModel)]="form.location" name="location" required placeholder="መርካቶ" />
+
+        <label>ስልክ ቁጥር</label>
+        <input type="text" [(ngModel)]="form.phoneNumber" name="phoneNumber" required placeholder="0911223344" />
+
+        <label>የይለፍ ቃል</label>
+        <input type="password" [(ngModel)]="form.password" name="password" required />
+
+        @if (errorMessage()) {
+          <p class="error">{{ errorMessage() }}</p>
+        }
+
+        <button type="submit" class="btn btn-berbere">ተመዝገብ</button>
+      </form>
+      <button class="close-btn" (click)="close()">✕</button>
+    </div>
+  </div>
+}

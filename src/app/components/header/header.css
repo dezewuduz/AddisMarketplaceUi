@@ -58,3 +58,8 @@ nav a:hover { border-bottom-color: var(--saffron); }
 }
 
 .btn-berbere { background: var(--berbere); border-color: var(--berbere); color: #fff; }
+.welcome-text {
+  font-size: 14px;
+  color: var(--ink);
+  margin-right: 8px;
+}

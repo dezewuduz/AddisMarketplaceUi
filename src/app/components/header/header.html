@@ -13,7 +13,15 @@
     <a>ለሻጮች</a>
   </nav>
   <div class="header-actions">
-    <button class="btn">ግባ</button>
-    <button class="btn btn-berbere">ሱቅ ክፈት</button>
+    @if (authService.isLoggedIn()) {
+      <a routerLink="/dashboard" class="welcome-text">👋 {{ authService.sellerName() }}</a>
+      <button class="btn" (click)="authService.logout()">ውጣ</button>
+    } @else {
+      <button class="btn" (click)="loginForm.open()">ግባ</button>
+      <button class="btn btn-berbere" (click)="registerForm.open()">ሱቅ ክፈት</button>
+    }
   </div>
 </header>
+
+<app-login-form #loginForm></app-login-form>
+<app-register-form #registerForm></app-register-form>
