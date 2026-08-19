@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth';
+import { ModalStateService } from '../../services/modal-state';
 import { RegisterRequest, LoginRequest } from '../../models/auth';
 
 @Component({
@@ -11,27 +12,21 @@ import { RegisterRequest, LoginRequest } from '../../models/auth';
   styleUrl: './register-form.css',
 })
 export class RegisterForm {
-  isOpen = signal(false);
   form: RegisterRequest = { name: '', location: '', phoneNumber: '', password: '' };
-  errorMessage = signal('');
-  successMessage = signal('');
+  errorMessage = '';
 
-  constructor(private authService: AuthService) {}
-
-  open(): void {
-    this.isOpen.set(true);
-    this.errorMessage.set('');
-    this.successMessage.set('');
-  }
+  constructor(
+    private authService: AuthService,
+    public modalState: ModalStateService
+  ) {}
 
   close(): void {
-    this.isOpen.set(false);
+    this.modalState.closeRegister();
   }
 
   onSubmit(): void {
     this.authService.register(this.form).subscribe({
       next: () => {
-        // ምዝገባ ካለቀ በኋላ በራስ-ሰር login ያድርግ
         const loginData: LoginRequest = {
           phoneNumber: this.form.phoneNumber,
           password: this.form.password
@@ -44,7 +39,7 @@ export class RegisterForm {
         });
       },
       error: (err) => {
-        this.errorMessage.set(err.error ?? 'ምዝገባ አልተሳካም። እባክህ እንደገና ሞክር።');
+        this.errorMessage = err.error ?? 'ምዝገባ አልተሳካም። እባክህ እንደገና ሞክር።';
       }
     });
   }

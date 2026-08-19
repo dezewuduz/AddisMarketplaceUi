@@ -19,11 +19,21 @@ export class ProductGrid implements OnInit {
   @ViewChild('orderModal') orderModal!: OrderModal;
 
   filteredProducts = computed(() => {
-    const category = this.filterService.selectedCategory();
-    const all = this.allProducts();
-    if (category === 'ሁሉም') return all;
-    return all.filter(p => p.category === category);
-  });
+  const category = this.filterService.selectedCategory();
+  const query = this.filterService.searchQuery().trim().toLowerCase();
+  let result = this.allProducts();
+
+  if (category !== 'ሁሉም') {
+    result = result.filter(p => p.category === category);
+  }
+  if (query) {
+    result = result.filter(p =>
+      p.name.toLowerCase().includes(query) ||
+      p.description.toLowerCase().includes(query)
+    );
+  }
+  return result;
+});
 
   constructor(
     private productService: ProductService,

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CategoryFilterService } from '../../services/category-filter';
+import { ModalStateService } from '../../services/modal-state';
 
 @Component({
   selector: 'app-hero',
@@ -10,8 +12,30 @@ import { FormsModule } from '@angular/forms';
 export class Hero {
   searchQuery = '';
 
+  stalls = [
+    { num: '014', label: 'ልብስ', category: 'ልብስ' },
+    { num: '027', label: 'ጫማ', category: 'ጫማ' },
+    { num: '031', label: 'ኤሌክትሮ.', category: 'ኤሌክትሮኒክስ' },
+    { num: '045', label: 'የቤት እቃ', category: 'የቤት እቃ' },
+    { num: '052', label: 'ኮስሜቲክስ', category: 'ኮስሜቲክስ' },
+    { num: '063', label: 'ጌጣጌጥ', category: 'ጌጣጌጥ' },
+    { num: '071', label: 'ስፖርት', category: 'ሌላ' },
+    { num: '084', label: 'ስልክ', category: 'ኤሌክትሮኒክስ' },
+    { num: '099', label: 'ሌላ', category: 'ሌላ' },
+  ];
+
+  constructor(
+    public filterService: CategoryFilterService,
+    public modalState: ModalStateService
+  ) {}
+
   onSearch(): void {
-    console.log('Search:', this.searchQuery);
-    // ወደፊት፦ ProductService.searchProducts() ወይም route ወደ /products?q=...
+    this.filterService.searchQuery.set(this.searchQuery);
+    document.querySelector('.product-section')?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  onStallClick(category: string): void {
+    this.filterService.selectedCategory.set(category);
+    document.querySelector('.product-section')?.scrollIntoView({ behavior: 'smooth' });
   }
 }

@@ -17,11 +17,11 @@
       <a routerLink="/dashboard" class="welcome-text">👋 {{ authService.sellerName() }}</a>
       <button class="btn" (click)="authService.logout()">ውጣ</button>
     } @else {
-      <button class="btn" (click)="loginForm.open()">ግባ</button>
-      <button class="btn btn-berbere" (click)="registerForm.open()">ሱቅ ክፈት</button>
+      <button class="btn" (click)="modalState.openLogin()">ግባ</button>
+      <button class="btn btn-berbere" (click)="modalState.openRegister()">ሱቅ ክፈት</button>
     }
   </div>
 </header>
 
-<app-login-form #loginForm></app-login-form>
-<app-register-form #registerForm></app-register-form>
+<app-login-form></app-login-form>
+<app-register-form></app-register-form>

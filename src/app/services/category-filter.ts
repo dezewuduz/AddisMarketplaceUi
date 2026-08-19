@@ -5,4 +5,5 @@ import { Injectable, signal } from '@angular/core';
 })
 export class CategoryFilterService {
   selectedCategory = signal<string>('ሁሉም');
+  searchQuery = signal<string>('');
 }

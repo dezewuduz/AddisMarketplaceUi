@@ -9,27 +9,26 @@
       <p class="hero-desc">ማንኛውም ነጋዴ ፎቶ፣ ዋጋ እና መግለጫ ብቻ ለጥፎ በደቂቃዎች ውስጥ ይሸጣል። ገዥዎችም በአንድ ገጽ ላይ ሁሉንም ሱቆች እያመዛዘኑ ትክክለኛውን ያገኛሉ።</p>
 
       <div class="search-bar">
-        <input type="text" placeholder="ምን ይፈልጋሉ? ለምሳሌ 'ወንድ ጃኬት'" [(ngModel)]="searchQuery" />
+        <input type="text" placeholder="ምን ይፈልጋሉ? ለምሳሌ 'ወንድ ጃኬት'" [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" />
         <button (click)="onSearch()">ፈልግ</button>
       </div>
 
       <div class="hero-cta">
-        <button class="btn btn-solid">እንደ ገዥ ግባ</button>
-        <button class="btn">እንደ ሻጭ ተመዝገብ</button>
+        <button class="btn btn-solid" (click)="modalState.openLogin()">እንደ ገዥ ግባ</button>
+        <button class="btn" (click)="modalState.openRegister()">እንደ ሻጭ ተመዝገብ</button>
       </div>
     </div>
 
     <div class="stall-map">
       <div class="stall-grid">
-        <div class="stall active"><span class="num">014</span>ልብስ</div>
-        <div class="stall"><span class="num">027</span>ጫማ</div>
-        <div class="stall"><span class="num">031</span>ኤሌክትሮ.</div>
-        <div class="stall"><span class="num">045</span>የቤት እቃ</div>
-        <div class="stall active"><span class="num">052</span>ኮስሜቲክስ</div>
-        <div class="stall"><span class="num">063</span>ጌጣጌጥ</div>
-        <div class="stall"><span class="num">071</span>ስፖርት</div>
-        <div class="stall"><span class="num">084</span>ስልክ</div>
-        <div class="stall"><span class="num">099</span>ሌላ</div>
+        @for (stall of stalls; track stall.num) {
+          <div
+            class="stall"
+            [class.active]="filterService.selectedCategory() === stall.category"
+            (click)="onStallClick(stall.category)">
+            <span class="num">{{ stall.num }}</span>{{ stall.label }}
+          </div>
+        }
       </div>
     </div>
   </div>

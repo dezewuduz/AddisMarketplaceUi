@@ -1,4 +1,4 @@
-@if (isOpen()) {
+@if (modalState.loginOpen()) {
   <div class="modal-overlay" (click)="close()">
     <div class="modal-box" (click)="$event.stopPropagation()">
       <h3>ግባ</h3>
@@ -9,8 +9,8 @@
         <label>የይለፍ ቃል</label>
         <input type="password" [(ngModel)]="form.password" name="password" required />
 
-        @if (errorMessage()) {
-          <p class="error">{{ errorMessage() }}</p>
+        @if (errorMessage) {
+          <p class="error">{{ errorMessage }}</p>
         }
 
         <button type="submit" class="btn btn-solid">ግባ</button>

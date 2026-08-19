@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth';
+import { ModalStateService } from '../../services/modal-state';
 import { LoginRequest } from '../../models/auth';
 
 @Component({
@@ -11,19 +12,16 @@ import { LoginRequest } from '../../models/auth';
   styleUrl: './login-form.css',
 })
 export class LoginForm {
-  isOpen = signal(false);
   form: LoginRequest = { phoneNumber: '', password: '' };
-  errorMessage = signal('');
+  errorMessage = '';
 
-  constructor(private authService: AuthService) {}
-
-  open(): void {
-    this.isOpen.set(true);
-    this.errorMessage.set('');
-  }
+  constructor(
+    private authService: AuthService,
+    public modalState: ModalStateService
+  ) {}
 
   close(): void {
-    this.isOpen.set(false);
+    this.modalState.closeLogin();
   }
 
   onSubmit(): void {
@@ -31,9 +29,10 @@ export class LoginForm {
       next: () => {
         this.close();
         this.form = { phoneNumber: '', password: '' };
+        this.errorMessage = '';
       },
-      error: (err) => {
-        this.errorMessage.set('ስልክ ቁጥር ወይም የይለፍ ቃል ልክ አይደለም።');
+      error: () => {
+        this.errorMessage = 'ስልክ ቁጥር ወይም የይለፍ ቃል ልክ አይደለም።';
       }
     });
   }
