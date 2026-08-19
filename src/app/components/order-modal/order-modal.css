@@ -19,6 +19,9 @@
   border-radius: 14px;
   padding: 32px;
   width: 360px;
+  max-width: 90vw;      /* ← ስክሪን ስፋት ከ90% በላይ እንዳይሆን */
+  max-height: 90vh;     /* ← ስክሪን ቁመት ከ90% በላይ እንዳይሆን */
+  overflow-y: auto;     /* ← ፎርም ረጅም ከሆነ scroll ማድረግ ያስችላል */
   position: relative;
   font-family: 'Noto Sans Ethiopic', sans-serif;
 }

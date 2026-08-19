@@ -92,6 +92,45 @@
 .stall.active .num { color: var(--saffron); }
 
 @media (max-width: 860px) {
-  .hero-inner { grid-template-columns: 1fr; }
-  .hero-title { font-size: 38px; }
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 32px 16px 40px;
+  }
+  .hero-title {
+    font-size: 30px;
+  }
+  .hero-desc {
+    font-size: 14px;
+  }
+  .hero-cta {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .hero-cta .btn {
+    width: 100%;
+  }
+  .search-bar {
+    max-width: 100%;
+  }
+  .stall-map {
+    width: 100%;
+    box-sizing: border-box;
+    transform: none;
+    margin-top: 20px;
+  }
+  .stall-grid {
+    gap: 6px;
+  }
+  .stall {
+    padding: 8px 4px;
+    font-size: 10px;
+  }
+  .stall .num {
+    font-size: 12px;
+  }
 }
