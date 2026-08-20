@@ -1,0 +1,99 @@
+:host {
+  --paper: #EFE6D6;
+  --card: #F8F3E8;
+  --ink: #2B2620;
+  --ink-soft: #5B5346;
+  --saffron: #D9A62E;
+  --berbere: #A63A2E;
+  --leaf: #3F5A48;
+}
+
+.my-orders {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 56px 28px 80px;
+  font-family: 'Noto Sans Ethiopic', 'Work Sans', sans-serif;
+}
+
+.page-header { margin-bottom: 30px; }
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--berbere);
+  margin-bottom: 10px;
+}
+
+.page-header h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.intro { font-size: 14.5px; color: var(--ink-soft); }
+
+.search-box {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 30px;
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px 14px;
+  font-size: 14.5px;
+  font-family: 'Noto Sans Ethiopic', sans-serif;
+  outline: none;
+}
+
+.search-box button {
+  background: var(--saffron);
+  border: none;
+  border-radius: 6px;
+  padding: 0 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.status-text { color: var(--ink-soft); padding: 20px 0; }
+.error { color: var(--berbere); font-size: 14px; }
+
+.orders-list { display: flex; flex-direction: column; gap: 12px; }
+
+.order-card {
+  background: var(--card);
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.order-info { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.order-id { font-weight: 700; color: var(--ink); }
+
+.order-status {
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+.status-0 { background: #D9A62E; color: #2B2620; }
+.status-1 { background: #3F5A48; color: #fff; }
+.status-2 { background: #2B2620; color: #EFE6D6; }
+.status-3 { background: #ccc; color: #555; }
+
+.order-detail { font-size: 13px; color: var(--ink-soft); margin-bottom: 4px; }
+
+@media (max-width: 640px) {
+  .my-orders { padding: 32px 16px 60px; }
+  .page-header h1 { font-size: 24px; }
+}

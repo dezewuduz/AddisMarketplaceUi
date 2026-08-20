@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { CategoryFilterService } from '../../services/category-filter';
 import { ModalStateService } from '../../services/modal-state';
 
 @Component({
   selector: 'app-hero',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './hero.html',
   styleUrl: './hero.css',
 })

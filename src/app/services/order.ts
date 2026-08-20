@@ -37,6 +37,10 @@ export class OrderService {
     return this.http.get<Order[]>(`${this.ordersUrl}/seller/${sellerId}`, { headers });
   }
 
+  getOrdersByBuyerPhone(phoneNumber: string): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.ordersUrl}/buyer-phone/${phoneNumber}`);
+  }
+
   updateStatus(orderId: number, status: number): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });

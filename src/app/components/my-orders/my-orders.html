@@ -1,0 +1,41 @@
+<section class="my-orders">
+  <div class="page-header">
+    <div class="eyebrow">ትዕዛዞቼ</div>
+    <h1>ትዕዛዞችህን ተከታተል</h1>
+    <p class="intro">የተጠቀምክበትን ስልክ ቁጥር አስገባ፣ ትዕዛዞችህ ይታዩሃል።</p>
+  </div>
+
+  <div class="search-box">
+    <input
+      type="text"
+      [(ngModel)]="phoneNumber"
+      placeholder="ስልክ ቁጥርህ (0911223344)"
+      (keyup.enter)="onSearch()" />
+    <button (click)="onSearch()">አሳይ</button>
+  </div>
+
+  @if (loading()) {
+    <p class="status-text">በመፈለግ ላይ...</p>
+  }
+
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
+
+  @if (searched() && !loading() && !errorMessage()) {
+    <div class="orders-list">
+      @for (order of orders(); track order.id) {
+        <div class="order-card">
+          <div class="order-info">
+            <span class="order-id">ትዕዛዝ #{{ order.id }}</span>
+            <span class="order-status" [class]="'status-' + order.status">{{ statusLabels[order.status] }}</span>
+          </div>
+          <div class="order-detail">ብዛት፦ {{ order.quantity }} | ጠቅላላ፦ {{ order.totalPrice }} ብር</div>
+          <div class="order-detail">ክፍያ፦ {{ order.isPaid ? '✅ ተከፍሏል' : '⏳ አልተከፈለም' }}</div>
+        </div>
+      } @empty {
+        <p class="status-text">በዚህ ስልክ ቁጥር ምንም ትዕዛዝ አልተገኘም።</p>
+      }
+    </div>
+  }
+</section>
