@@ -9,7 +9,7 @@ import { CategoryFilterService } from '../../services/category-filter';
   styleUrl: './category-chips.css',
 })
 export class CategoryChips {
-  categories = ['ሁሉም', 'ልብስ', 'ጫማ', 'ኤሌክትሮኒክስ', 'የቤት እቃ', 'ኮስሜቲክስ', 'ጌጣጌጥ'];
+  categories = ['All', 'Clothing', 'Shoes', 'Electronics', 'Household Items', 'Cosmetics', 'Jewelry'];
 
   constructor(public filterService: CategoryFilterService) {}
 

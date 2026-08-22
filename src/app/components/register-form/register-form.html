@@ -1,25 +1,25 @@
 @if (modalState.registerOpen()) {
   <div class="modal-overlay" (click)="close()">
     <div class="modal-box" (click)="$event.stopPropagation()">
-      <h3>ሱቅ ክፈት</h3>
+      <h3>Open a Shop</h3>
       <form (ngSubmit)="onSubmit()">
-        <label>የሱቅ ስም</label>
-        <input type="text" [(ngModel)]="form.name" name="name" required placeholder="ሰላም ልብስ ሱቅ" />
+        <label>Shop Name</label>
+        <input type="text" [(ngModel)]="form.name" name="name" required placeholder="Selam Clothing Shop" />
 
-        <label>አካባቢ</label>
-        <input type="text" [(ngModel)]="form.location" name="location" required placeholder="መርካቶ" />
+        <label>Location</label>
+        <input type="text" [(ngModel)]="form.location" name="location" required placeholder="Merkato" />
 
-        <label>ስልክ ቁጥር</label>
+        <label>Phone Number</label>
         <input type="text" [(ngModel)]="form.phoneNumber" name="phoneNumber" required placeholder="0911223344" />
 
-        <label>የይለፍ ቃል</label>
+        <label>Password</label>
         <input type="password" [(ngModel)]="form.password" name="password" required />
 
         @if (errorMessage) {
           <p class="error">{{ errorMessage }}</p>
         }
 
-        <button type="submit" class="btn btn-berbere">ተመዝገብ</button>
+        <button type="submit" class="btn btn-berbere">Register</button>
       </form>
       <button class="close-btn" (click)="close()">✕</button>
     </div>

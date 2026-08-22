@@ -17,8 +17,8 @@ export interface Order {
 }
 
 export const OrderStatusLabels: Record<number, string> = {
-  0: 'በመጠባበቅ ላይ',
-  1: 'ተረጋግጧል',
-  2: 'ተጠናቋል',
-  3: 'ተሰርዟል'
+  0: 'Pending',
+  1: 'Confirmed',
+  2: 'Completed',
+  3: 'Cancelled'
 };

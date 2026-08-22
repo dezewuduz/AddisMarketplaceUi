@@ -33,7 +33,7 @@ export class MyOrders {
         this.loading.set(false);
       },
       error: () => {
-        this.errorMessage.set('ትዕዛዞችን ማምጣት አልተቻለም።');
+        this.errorMessage.set('Could not load orders.');
         this.loading.set(false);
       }
     });

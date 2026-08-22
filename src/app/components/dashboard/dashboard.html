@@ -1,46 +1,46 @@
 <section class="dashboard">
   <div class="dashboard-header">
-    <h2>የእኔ ሱቅ — {{ authService.sellerName() }}</h2>
+    <h2>My Shop — {{ authService.sellerName() }}</h2>
   </div>
 
   <div class="tabs">
     <button class="tab-btn" [class.active]="activeTab() === 'products'" (click)="activeTab.set('products')">
-      ምርቶቼ
+      My Products
     </button>
     <button class="tab-btn" [class.active]="activeTab() === 'orders'" (click)="activeTab.set('orders')">
-      የደረሱ ትዕዛዞች
+      Received Orders
     </button>
   </div>
 
   @if (activeTab() === 'products') {
     <button class="btn btn-berbere add-toggle" (click)="showAddForm.set(!showAddForm())">
-      {{ showAddForm() ? 'ዝጋ' : '+ አዲስ ምርት ጨምር' }}
+      {{ showAddForm() ? 'Close' : '+ Add New Product' }}
     </button>
 
     @if (showAddForm()) {
       <form class="add-form" (ngSubmit)="onAddProduct()">
-        <input type="text" [(ngModel)]="newProduct.name" name="name" placeholder="የምርት ስም" required />
-        <textarea [(ngModel)]="newProduct.description" name="description" placeholder="መግለጫ" required></textarea>
-        <input type="number" [(ngModel)]="newProduct.price" name="price" placeholder="ዋጋ (ብር)" required />
+        <input type="text" [(ngModel)]="newProduct.name" name="name" placeholder="Product Name" required />
+        <textarea [(ngModel)]="newProduct.description" name="description" placeholder="Description" required></textarea>
+        <input type="number" [(ngModel)]="newProduct.price" name="price" placeholder="Price (Birr)" required />
 
         <select [(ngModel)]="newProduct.category" name="category" required>
-          <option value="" disabled selected>ምድብ ምረጥ</option>
-          <option value="ልብስ">ልብስ</option>
-          <option value="ጫማ">ጫማ</option>
-          <option value="ኤሌክትሮኒክስ">ኤሌክትሮኒክስ</option>
-          <option value="የቤት እቃ">የቤት እቃ</option>
-          <option value="ኮስሜቲክስ">ኮስሜቲክስ</option>
-          <option value="ጌጣጌጥ">ጌጣጌጥ</option>
-          <option value="ሌላ">ሌላ</option>
-        </select>
-
+          <option value="" disabled selected>Select Category</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Shoes">Shoes</option>
+          <option value="Phones">Phones</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Household Items">Household Items</option>
+          <option value="Cosmetics">Cosmetics</option>
+          <option value="Jewelry">Jewelry</option>
+          <option value="Other">Other</option>
+       </select>
         <label class="file-label">
-          📷 ፎቶ ምረጥ (Gallery/File Explorer)
+          📷 Choose Photo (Gallery/File Explorer)
           <input type="file" accept="image/*" (change)="onFileSelected($event)" />
         </label>
 
         @if (uploading()) {
-          <p class="status-text">ፎቶ በመጫን ላይ...</p>
+          <p class="status-text">Uploading photo...</p>
         }
 
         @if (newProduct.photoUrl) {
@@ -51,12 +51,12 @@
           <p class="error">{{ errorMessage() }}</p>
         }
 
-        <button type="submit" class="btn btn-solid">አትም</button>
+        <button type="submit" class="btn btn-solid">Submit</button>
       </form>
     }
 
     @if (loading()) {
-      <p class="status-text">በመጫን ላይ...</p>
+      <p class="status-text">Loading...</p>
     }
 
     @if (!loading()) {
@@ -72,12 +72,12 @@
             </div>
             <div class="p-body">
               <div class="p-name">{{ product.name }}</div>
-              <div class="p-price">{{ product.price }} ብር</div>
-              <button class="delete-btn" (click)="onDelete(product.id)">ሰርዝ</button>
+              <div class="p-price">{{ product.price }} Birr</div>
+              <button class="delete-btn" (click)="onDelete(product.id)">Delete</button>
             </div>
           </div>
         } @empty {
-          <p class="status-text">ገና ምንም ምርት አልጨመርክም።</p>
+          <p class="status-text">You haven't added any products yet.</p>
         }
       </div>
     }
@@ -85,7 +85,7 @@
 
   @if (activeTab() === 'orders') {
     @if (ordersLoading()) {
-      <p class="status-text">በመጫን ላይ...</p>
+      <p class="status-text">Loading...</p>
     }
 
     @if (!ordersLoading()) {
@@ -93,30 +93,30 @@
         @for (order of myOrders(); track order.id) {
           <div class="order-card">
             <div class="order-info">
-              <span class="order-id">ትዕዛዝ #{{ order.id }}</span>
+              <span class="order-id">Order #{{ order.id }}</span>
               <span class="order-status" [class]="'status-' + order.status">{{ statusLabels[order.status] }}</span>
             </div>
-            <div class="order-detail">ብዛት፦ {{ order.quantity }} | ጠቅላላ፦ {{ order.totalPrice }} ብር</div>
+            <div class="order-detail">Qty: {{ order.quantity }} | Total: {{ order.totalPrice }} Birr</div>
             @if (order.buyer) {
-              <div class="order-detail">ገዥ፦ {{ order.buyer.name }} | 📞 {{ order.buyer.phoneNumber }}</div>
+              <div class="order-detail">Buyer: {{ order.buyer.name }} | 📞 {{ order.buyer.phoneNumber }}</div>
             }
-            <div class="order-detail">ክፍያ፦ {{ order.isPaid ? '✅ ተከፍሏል' : '⏳ አልተከፈለም' }}</div>
+            <div class="order-detail">Payment: {{ order.isPaid ? '✅ Paid' : '⏳ Not Paid' }}</div>
 
             <div class="order-actions">
               @if (order.status === 0) {
-                <button class="btn-small confirm" (click)="onConfirmOrder(order.id)">አረጋግጥ</button>
-                <button class="btn-small cancel" (click)="onCancelOrder(order.id)">ሰርዝ</button>
+                <button class="btn-small confirm" (click)="onConfirmOrder(order.id)">Confirm</button>
+                <button class="btn-small cancel" (click)="onCancelOrder(order.id)">Cancel</button>
               }
               @if (order.status === 1) {
                 @if (!order.isPaid) {
-                  <button class="btn-small confirm" (click)="onConfirmPayment(order.id)">ክፍያ አረጋግጥ</button>
+                  <button class="btn-small confirm" (click)="onConfirmPayment(order.id)">Confirm Payment</button>
                 }
-                <button class="btn-small complete" (click)="onCompleteOrder(order.id)">አጠናቅ</button>
+                <button class="btn-small complete" (click)="onCompleteOrder(order.id)">Complete</button>
               }
             </div>
           </div>
         } @empty {
-          <p class="status-text">ገና ምንም ትዕዛዝ የለም።</p>
+          <p class="status-text">No orders yet.</p>
         }
       </div>
     }

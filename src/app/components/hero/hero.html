@@ -3,20 +3,20 @@
     <div>
       <div class="hero-eyebrow">
         <span class="dot"></span>
-        <span class="eyebrow">ገበያ ላይ ይግቡ</span>
+        <span class="eyebrow">Join the Market</span>
       </div>
-      <h1 class="hero-title">ያለ ኪራይ ሱቅ ክፈት፣<br><em>የትም</em> ገበያ ውጣ።</h1>
-      <p class="hero-desc">ማንኛውም ነጋዴ ፎቶ፣ ዋጋ እና መግለጫ ብቻ ለጥፎ በደቂቃዎች ውስጥ ይሸጣል። ገዥዎችም በአንድ ገጽ ላይ ሁሉንም ሱቆች እያመዛዘኑ ትክክለኛውን ያገኛሉ።</p>
+      <h1 class="hero-title">Open a Shop Without Rent,<br><em>Sell</em> Anywhere.</h1>
+      <p class="hero-desc">Any merchant can post a photo, price, and description to start selling in minutes. Buyers compare all shops on one page to find exactly what they need.</p>
 
       <div class="search-bar">
-        <input type="text" placeholder="ምን ይፈልጋሉ? ለምሳሌ 'ወንድ ጃኬት'" [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" />
-        <button (click)="onSearch()">ፈልግ</button>
+        <input type="text" placeholder="What are you looking for? e.g. 'men's jacket'" [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" />
+        <button (click)="onSearch()">Search</button>
       </div>
 
-    <div class="hero-cta">
-  <a routerLink="/buyer-guide" class="btn btn-solid">እንደ ገዥ ግባ</a>
-  <button class="btn" (click)="modalState.openRegister()">እንደ ሻጭ ተመዝገብ</button>
-    </div>
+      <div class="hero-cta">
+        <a routerLink="/buyer-guide" class="btn btn-solid">Buy as a Guest</a>
+        <button class="btn" (click)="modalState.openRegister()">Register as a Seller</button>
+      </div>
     </div>
 
     <div class="stall-map">

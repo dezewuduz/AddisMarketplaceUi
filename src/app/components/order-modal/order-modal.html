@@ -2,21 +2,21 @@
   <div class="modal-overlay" (click)="close()">
     <div class="modal-box" (click)="$event.stopPropagation()">
       @if (successMessage()) {
-        <h3>✅ ተሳክቷል</h3>
+        <h3>✅ Success</h3>
         <p class="success">{{ successMessage() }}</p>
-        <button class="btn btn-solid" (click)="close()">ዝጋ</button>
+        <button class="btn btn-solid" (click)="close()">Close</button>
       } @else {
-        <h3>ትዕዛዝ ስጥ</h3>
-        <p class="product-summary">{{ product?.name }} — {{ product?.price }} ብር</p>
+        <h3>Place Order</h3>
+        <p class="product-summary">{{ product?.name }} — {{ product?.price }} Birr</p>
 
         <form (ngSubmit)="onSubmit()">
-          <label>ስምህ</label>
+          <label>Your Name</label>
           <input type="text" [(ngModel)]="buyerName" name="buyerName" required />
 
-          <label>ስልክ ቁጥርህ</label>
+          <label>Your Phone Number</label>
           <input type="text" [(ngModel)]="buyerPhone" name="buyerPhone" required placeholder="0911223344" />
 
-          <label>ብዛት</label>
+          <label>Quantity</label>
           <input type="number" [(ngModel)]="quantity" name="quantity" min="1" required />
 
           @if (errorMessage()) {
@@ -24,7 +24,7 @@
           }
 
           <button type="submit" class="btn btn-solid" [disabled]="submitting()">
-            {{ submitting() ? 'በመላክ ላይ...' : 'ትዕዛዝ አረጋግጥ' }}
+            {{ submitting() ? 'Sending...' : 'Confirm Order' }}
           </button>
         </form>
       }

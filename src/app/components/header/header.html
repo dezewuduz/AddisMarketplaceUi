@@ -1,24 +1,24 @@
 <header>
   <div class="logo">
-    <div class="logo-mark">ገ</div>
+<img src="Addis.jpg" alt="AddisMarketPlace" class="Addis-img" />
     <div>
-      <div class="logo-text">ገበያ<span class="dot">.</span></div>
-      <div class="logo-sub">ማንኛውም ነገር፣ ማንኛውም ሻጭ</div>
+      <div class="logo-text">Gebeya<span class="dot">.</span></div>
+      <div class="logo-sub">Anything, Any Seller</div>
     </div>
   </div>
   <nav>
-    <a>ገበያ ላይ ይግቡ</a>
-    <a>ምድቦች</a>
-    <a>ስለ እኛ</a>
-    <a>ለሻጮች</a>
+    <a routerLink="/">Go to Market</a>
+    <a (click)="scrollToProducts()">Categories</a>
+    <a routerLink="/buyer-guide">About Us</a>
+    <a (click)="onSellersClick()">For Sellers</a>
   </nav>
   <div class="header-actions">
     @if (authService.isLoggedIn()) {
       <a routerLink="/dashboard" class="welcome-text">👋 {{ authService.sellerName() }}</a>
-      <button class="btn" (click)="authService.logout()">ውጣ</button>
+      <button class="btn" (click)="authService.logout()">Logout</button>
     } @else {
-      <button class="btn" (click)="modalState.openLogin()">ግባ</button>
-      <button class="btn btn-berbere" (click)="modalState.openRegister()">ሱቅ ክፈት</button>
+      <button class="btn" (click)="modalState.openLogin()">Login</button>
+      <button class="btn btn-berbere" (click)="modalState.openRegister()">Open Shop</button>
     }
   </div>
 </header>

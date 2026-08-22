@@ -1,14 +1,14 @@
 <section class="product-section">
   <div class="section-head">
-    <div class="section-title">ዛሬ የተጨመሩ</div>
+    <div class="section-title">Recently Added</div>
   </div>
 
   @if (loading()) {
-    <p class="status-text">በመጫን ላይ...</p>
+    <p class="status-text">Loading...</p>
   }
 
   @if (error()) {
-    <p class="status-text">ምርቶችን ማምጣት አልተቻለም። API እየሮጠ መሆኑን አረጋግጥ።</p>
+    <p class="status-text">Could not load products. Make sure the API is running.</p>
   }
 
   @if (!loading() && !error()) {
@@ -25,8 +25,8 @@
           <div class="p-body">
             <div class="p-shop">{{ product.sellerName }}</div>
             <div class="p-name">{{ product.name }}</div>
-            <div class="p-price">{{ product.price }} ብር</div>
-            <button class="buy-btn" (click)="onBuyClick(product)">ግዛ</button>
+            <div class="p-price">{{ product.price }} Birr</div>
+            <button class="buy-btn" (click)="onBuyClick(product)">Buy</button>
           </div>
         </div>
       }

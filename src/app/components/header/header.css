@@ -23,12 +23,10 @@ header {
 
 .logo { display: flex; align-items: center; gap: 10px; }
 
-.logo-mark {
-  width: 38px; height: 38px; border-radius: 8px;
-  background: var(--berbere);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--paper); font-family: 'Fraunces', serif;
-  font-weight: 700; font-size: 20px; transform: rotate(-4deg);
+.Addis-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
 }
 
 .logo-text {

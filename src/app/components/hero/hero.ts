@@ -13,17 +13,17 @@ import { ModalStateService } from '../../services/modal-state';
 export class Hero {
   searchQuery = '';
 
-  stalls = [
-    { num: '014', label: 'ልብስ', category: 'ልብስ' },
-    { num: '027', label: 'ጫማ', category: 'ጫማ' },
-    { num: '031', label: 'ኤሌክትሮ.', category: 'ኤሌክትሮኒክስ' },
-    { num: '045', label: 'የቤት እቃ', category: 'የቤት እቃ' },
-    { num: '052', label: 'ኮስሜቲክስ', category: 'ኮስሜቲክስ' },
-    { num: '063', label: 'ጌጣጌጥ', category: 'ጌጣጌጥ' },
-    { num: '071', label: 'ስፖርት', category: 'ሌላ' },
-    { num: '084', label: 'ስልክ', category: 'ኤሌክትሮኒክስ' },
-    { num: '099', label: 'ሌላ', category: 'ሌላ' },
-  ];
+ stalls = [
+  { num: '014', label: 'Clothing', category: 'Clothing' },
+  { num: '027', label: 'Shoes', category: 'Shoes' },
+  { num: '031', label: 'Electro.', category: 'Electronics' },
+  { num: '045', label: 'Household', category: 'Household Items' },
+  { num: '052', label: 'Cosmetics', category: 'Cosmetics' },
+  { num: '063', label: 'Jewelry', category: 'Jewelry' },
+  { num: '071', label: 'Sports', category: 'Other' },
+  { num: '084', label: 'Phones', category: 'Electronics' },
+  { num: '099', label: 'Other', category: 'Other' },
+];
 
   constructor(
     public filterService: CategoryFilterService,
