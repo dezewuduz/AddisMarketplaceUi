@@ -78,28 +78,28 @@ export class Dashboard implements OnInit {
   onConfirmOrder(orderId: number): void {
     this.orderService.updateStatus(orderId, 1).subscribe({
       next: () => this.loadMyOrders(),
-      error: () => this.errorMessage.set('ትዕዛዝ ማረጋገጥ አልተሳካም።')
+      error: () => this.errorMessage.set('is not confirm order')
     });
   }
 
   onCompleteOrder(orderId: number): void {
     this.orderService.updateStatus(orderId, 2).subscribe({
       next: () => this.loadMyOrders(),
-      error: () => this.errorMessage.set('ትዕዛዝ ማጠናቀቅ አልተሳካም።')
+      error: () => this.errorMessage.set('is not complete order')
     });
   }
 
   onCancelOrder(orderId: number): void {
     this.orderService.updateStatus(orderId, 3).subscribe({
       next: () => this.loadMyOrders(),
-      error: () => this.errorMessage.set('ትዕዛዝ መሰረዝ አልተሳካም።')
+      error: () => this.errorMessage.set('is not cancel order')
     });
   }
 
   onConfirmPayment(orderId: number): void {
     this.orderService.confirmPayment(orderId).subscribe({
       next: () => this.loadMyOrders(),
-      error: () => this.errorMessage.set('ክፍያ ማረጋገጥ አልተሳካም።')
+      error: () => this.errorMessage.set('is not confirm payment')
     });
   }
 
@@ -115,7 +115,7 @@ export class Dashboard implements OnInit {
         this.uploading.set(false);
       },
       error: () => {
-        this.errorMessage.set('ፎቶ መጫን አልተሳካም።');
+        this.errorMessage.set('is not upload photo');
         this.uploading.set(false);
       }
     });
@@ -128,15 +128,15 @@ export class Dashboard implements OnInit {
         this.newProduct = { name: '', description: '', price: 0, photoUrl: null, category: '' };
         this.loadMyProducts();
       },
-      error: () => this.errorMessage.set('ምርት መጨመር አልተሳካም።')
+      error: () => this.errorMessage.set('is not add product')
     });
   }
 
   onDelete(id: number): void {
-    if (!confirm('እርግጠኛ ነህ ይህን ምርት መሰረዝ ትፈልጋለህ?')) return;
+    if (!confirm('are you sure you want to delete this product?')) return;
     this.productService.deleteProduct(id).subscribe({
       next: () => this.loadMyProducts(),
-      error: () => this.errorMessage.set('መሰረዝ አልተሳካም።')
+      error: () => this.errorMessage.set('is not delete product')
     });
   }
 }

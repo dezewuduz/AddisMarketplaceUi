@@ -32,7 +32,7 @@ export class LoginForm {
         this.errorMessage = '';
       },
       error: () => {
-        this.errorMessage = 'ስልክ ቁጥር ወይም የይለፍ ቃል ልክ አይደለም።';
+        this.errorMessage = 'it is not correct password and phone no';
       }
     });
   }
