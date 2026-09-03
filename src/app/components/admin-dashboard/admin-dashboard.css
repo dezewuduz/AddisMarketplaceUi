@@ -1,0 +1,54 @@
+.admin-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.seller-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.seller-table th, .seller-table td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.seller-table th {
+  background-color: #f4f4f4;
+}
+
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.badge.verified {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.badge.unverified {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+button {
+  padding: 0.4rem 0.8rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+}

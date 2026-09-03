@@ -1,37 +1,140 @@
-<section class="product-section">
-  <div class="section-head">
-    <div class="section-title">Recently Added</div>
+@defer (on viewport) {
+
+  <section class="product-section">
+<div class="section-head">
+  <div class="section-title">Recently Added</div>
+</div>
+
+@if (loading()) {
+
+  <p class="status-text">
+    Loading...
+  </p>
+
+}
+
+@if (error()) {
+
+  <p class="status-text">
+    Could not load products. Make sure the API is running.
+  </p>
+
+}
+
+@if (!loading() && !error()) {
+
+  <div class="grid">
+
+    @for (product of filteredProducts(); track product.id) {
+
+      <div class="p-card">
+
+        <div class="p-thumb">
+
+          @if (product.photoUrl) {
+
+            <img
+              [src]="product.photoUrl"
+              [alt]="product.name"
+            />
+
+          } @else {
+
+            <span>📦</span>
+
+          }
+
+        </div>
+
+        <div class="p-body">
+
+          <div class="p-shop">
+            {{ product.sellerName }}
+          </div>
+
+          <div class="p-name">
+            {{ product.name }}
+          </div>
+
+          <div class="p-price">
+            {{ product.price }} Birr
+          </div>
+
+          <button
+            class="buy-btn"
+            (click)="onBuyClick(product)">
+            Buy
+          </button>
+
+        </div>
+
+      </div>
+
+    }
+
   </div>
 
-  @if (loading()) {
-    <p class="status-text">Loading...</p>
-  }
+}
 
-  @if (error()) {
-    <p class="status-text">Could not load products. Make sure the API is running.</p>
-  }
-
-  @if (!loading() && !error()) {
-    <div class="grid">
-      @for (product of filteredProducts(); track product.id) {
-        <div class="p-card">
-          <div class="p-thumb">
-            @if (product.photoUrl) {
-              <img [src]="product.photoUrl" [alt]="product.name" />
-            } @else {
-              <span>📦</span>
-            }
-          </div>
-          <div class="p-body">
-            <div class="p-shop">{{ product.sellerName }}</div>
-            <div class="p-name">{{ product.name }}</div>
-            <div class="p-price">{{ product.price }} Birr</div>
-            <button class="buy-btn" (click)="onBuyClick(product)">Buy</button>
-          </div>
-        </div>
-      }
-    </div>
-  }
-</section>
+  </section>
 
 <app-order-modal #orderModal></app-order-modal>
+
+}
+@placeholder {
+
+  <section class="product-section">
+
+```
+<div class="section-head">
+  <div class="section-title">
+    Recently Added
+  </div>
+</div>
+
+<p class="status-text">
+  Recently added products will appear here...
+</p>
+```
+
+  </section>
+
+}
+@loading {
+
+  <section class="product-section">
+
+```
+<div class="section-head">
+  <div class="section-title">
+    Recently Added
+  </div>
+</div>
+
+<p class="status-text">
+  Loading recently added products...
+</p>
+```
+
+  </section>
+
+}
+@error {
+
+  <section class="product-section">
+
+```
+<div class="section-head">
+  <div class="section-title">
+    Recently Added
+  </div>
+</div>
+
+<p class="status-text">
+  Could not load Recently Added products.
+</p>
+```
+
+  </section>
+
+}

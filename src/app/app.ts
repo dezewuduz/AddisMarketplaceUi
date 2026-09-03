@@ -1,13 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './components/header/header';
-import { Hero } from './components/hero/hero';
-import { CategoryChips } from './components/category-chips/category-chips';
-import { ProductGrid } from './components/product-grid/product-grid';
+import { Footer } from './components/footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Hero, CategoryChips, ProductGrid],
+  imports: [RouterOutlet, Header, Footer],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

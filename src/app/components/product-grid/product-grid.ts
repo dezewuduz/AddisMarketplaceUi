@@ -15,25 +15,23 @@ export class ProductGrid implements OnInit {
   allProducts = signal<Product[]>([]);
   loading = signal(true);
   error = signal(false);
-
   @ViewChild('orderModal') orderModal!: OrderModal;
 
   filteredProducts = computed(() => {
-  const category = this.filterService.selectedCategory();
-  const query = this.filterService.searchQuery().trim().toLowerCase();
-  let result = this.allProducts();
-
-  if (category !== 'ሁሉም') {
-    result = result.filter(p => p.category === category);
-  }
-  if (query) {
-    result = result.filter(p =>
-      p.name.toLowerCase().includes(query) ||
-      p.description.toLowerCase().includes(query)
-    );
-  }
-  return result;
-});
+    const category = this.filterService.selectedCategory();
+    const query = this.filterService.searchQuery().trim().toLowerCase();
+    let result = this.allProducts();
+    if (category !== 'All') {
+      result = result.filter(p => p.category === category);
+    }
+    if (query) {
+      result = result.filter(p =>
+        p.name.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query)
+      );
+    }
+    return result;
+  });
 
   constructor(
     private productService: ProductService,
