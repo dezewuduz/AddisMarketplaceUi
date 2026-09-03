@@ -14,9 +14,12 @@
   </nav>
   <div class="header-actions">
     @if (authService.isLoggedIn()) {
-      <a routerLink="/dashboard" class="welcome-text">👋 {{ authService.sellerName() }}</a>
-      <button class="btn" (click)="authService.logout()">Logout</button>
-    } @else {
+  <a routerLink="/dashboard" class="welcome-text">👋 {{ authService.sellerName() }}</a>
+  @if (authService.isAdmin()) {
+    <a routerLink="/admin" class="btn">Admin</a>
+  }
+  <button class="btn" (click)="authService.logout()">Logout</button>
+} @else {
       <button class="btn" (click)="modalState.openLogin()">Login</button>
       <button class="btn btn-berbere" (click)="modalState.openRegister()">Open Shop</button>
     }

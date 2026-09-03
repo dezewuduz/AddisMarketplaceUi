@@ -11,14 +11,16 @@ export class AuthService {
 
   isLoggedIn = signal<boolean>(false);
   sellerName = signal<string>('');
+  isAdmin = signal<boolean>(false);
 
   constructor(private http: HttpClient) {
-    // ገጹ ዳግም ሲጫን (refresh) ካለ token ግባ (login) ሁኔታ አስቀጥል
+    // Check if there's a saved token and seller name when the app loads (refresh)
     const savedToken = localStorage.getItem('token');
     const savedName = localStorage.getItem('sellerName');
     if (savedToken && savedName) {
       this.isLoggedIn.set(true);
       this.sellerName.set(savedName);
+      this.isAdmin.set(this.decodeRole(savedToken) === 'Admin');
     }
   }
 
@@ -34,6 +36,7 @@ export class AuthService {
         localStorage.setItem('sellerName', response.name);
         this.isLoggedIn.set(true);
         this.sellerName.set(response.name);
+        this.isAdmin.set(this.decodeRole(response.token) === 'Admin');
       })
     );
   }
@@ -44,9 +47,21 @@ export class AuthService {
     localStorage.removeItem('sellerName');
     this.isLoggedIn.set(false);
     this.sellerName.set('');
+    this.isAdmin.set(false);
   }
 
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  // JWT token inside role claim how to decode it and check if the user is an admin
+  private decodeRole(token: string): string | null {
+    try {
+      const payload = token.split('.')[1];
+      const decoded = JSON.parse(atob(payload));
+      return decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] ?? null;
+    } catch {
+      return null;
+    }
   }
 }

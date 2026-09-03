@@ -1,0 +1,46 @@
+<div class="admin-container">
+  <h2>Admin Dashboard — Sellers</h2>
+
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
+
+  @if (loading()) {
+    <p>Loading...</p>
+  } @else {
+    <table class="seller-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Products</th>
+          <th>Verified</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (seller of sellers(); track seller.id) {
+          <tr>
+            <td>{{ seller.id }}</td>
+            <td>{{ seller.name }}</td>
+            <td>{{ seller.location }}</td>
+            <td>{{ seller.productCount }}</td>
+            <td>
+              @if (seller.isVerified) {
+                <span class="badge verified">✓ Verified</span>
+              } @else {
+                <span class="badge unverified">Not Verified</span>
+              }
+            </td>
+            <td>
+              @if (!seller.isVerified) {
+                <button (click)="onVerify(seller.id)">Verify</button>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
